@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@MainActor
 class RecipeListViewModel: ObservableObject {
     
     private let recipeListService = RecipesService()
@@ -15,7 +16,7 @@ class RecipeListViewModel: ObservableObject {
     
     
     func onAppear() async throws {
-        recipes = try [await recipeListService.fetchRecipes()]
+        recipes = try [await recipeListService.getRecipes()]
         loadRecipeNames()
     }
     

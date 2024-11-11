@@ -44,6 +44,7 @@
 		6AF7E30A2CE209B400DB6091 /* YummlyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YummlyTests.swift; sourceTree = "<group>"; };
 		6AF7E3132CE20B1400DB6091 /* RecipesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesService.swift; sourceTree = "<group>"; };
 		6AF7E31B2CE2141100DB6091 /* RecipeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListViewModel.swift; sourceTree = "<group>"; };
+		6AF7E31D2CE21FE500DB6091 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +75,7 @@
 		6AF7E2B62CE2091900DB6091 = {
 			isa = PBXGroup;
 			children = (
+				6AF7E31D2CE21FE500DB6091 /* README.md */,
 				6AF7E3052CE209B400DB6091 /* Yummly */,
 				6AF7E30B2CE209B400DB6091 /* YummlyTests */,
 				6AF7E2C02CE2091900DB6091 /* Products */,
