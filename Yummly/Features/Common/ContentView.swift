@@ -12,7 +12,7 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            RecipesView(viewModel: viewModel) // Use RecipesView here
+            RecipesView(viewModel: viewModel)
                 .navigationTitle(String(localized: "recipes_title"))
         }.onAppear() {
             Task {

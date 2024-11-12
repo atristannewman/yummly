@@ -28,4 +28,21 @@ struct Recipe: Codable, Identifiable {
         case sourceURL = "source_url"
         case youtubeURL = "youtube_url"
     }
+    
+    // Default values for error state
+    init(cuisine: String = "Unknown Cuisine",
+         name: String = "Unnamed Recipe",
+         photoURLLarge: String? = nil,
+         photoURLSmall: String? = nil,
+         id: String = UUID().uuidString,
+         sourceURL: String? = nil,
+         youtubeURL: String? = nil) {
+        self.cuisine = cuisine
+        self.name = name
+        self.photoURLLarge = photoURLLarge
+        self.photoURLSmall = photoURLSmall
+        self.id = id
+        self.sourceURL = sourceURL
+        self.youtubeURL = youtubeURL
+    }
 }

@@ -11,15 +11,24 @@ import SwiftUI
 class RecipeListViewModel: ObservableObject {
     
     private let recipeListService = RecipesService()
-    private var recipes: [Recipe] = []
+    @ObservedObject private var networkManager = NetworkManager()
+    private(set) var recipes: [Recipe] = []
     @Published var recipeNames: [String] = []
     @Published var culinaryStyles: [String] = []
     @Published var recipeImageUrls: [URL] = []
-    
+    @Published var isLoading = false
+    @Published var isConnected = false
     
     func onAppear() async throws {
+        
+        isLoading = true
+        defer {isLoading = false}
+        
+        isConnected = await networkManager.reachable()
+        
         recipes = try await recipeListService.getRecipes()
         await loadRecipes()
+        
     }
     
     private func loadRecipes() async -> Void {
