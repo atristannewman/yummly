@@ -13,10 +13,6 @@ actor RecipesService {
         
         let response = try await AF.request(url).serializingDecodable(RecipeResponse.self).value
         
-        response.recipes.forEach { recipe in
-            print(recipe)
-        }
-        
         return response.recipes
     }
 }

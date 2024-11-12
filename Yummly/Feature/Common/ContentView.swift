@@ -12,10 +12,8 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            VStack { // When another Feature/Screen is added this will likely change into a TabView
-                Label("Hello world!", systemImage: "star")
-            }
-            
+            RecipesView(viewModel: viewModel)
+                .navigationTitle("Recipes")
         }.onAppear() {
             Task {
                 try await viewModel.onAppear()

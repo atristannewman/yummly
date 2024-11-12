@@ -16,6 +16,10 @@
 		6AF7E31C2CE2141100DB6091 /* RecipeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF7E31B2CE2141100DB6091 /* RecipeListViewModel.swift */; };
 		6AF7E31F2CE2242600DB6091 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF7E31E2CE2242600DB6091 /* Recipe.swift */; };
 		6AF7E3252CE2277F00DB6091 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 6AF7E3242CE2277F00DB6091 /* Alamofire */; };
+		6AF7E32C2CE32E8D00DB6091 /* RecipesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF7E32B2CE32E8D00DB6091 /* RecipesView.swift */; };
+		6AF7E32F2CE32F0D00DB6091 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 6AF7E32E2CE32F0D00DB6091 /* Kingfisher */; };
+		6AF7E3332CE330E200DB6091 /* RecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF7E3322CE330E200DB6091 /* RecipeCell.swift */; };
+
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +52,8 @@
 		6AF7E31B2CE2141100DB6091 /* RecipeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListViewModel.swift; sourceTree = "<group>"; };
 		6AF7E31D2CE21FE500DB6091 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		6AF7E31E2CE2242600DB6091 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		6AF7E32B2CE32E8D00DB6091 /* RecipesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesView.swift; sourceTree = "<group>"; };
+		6AF7E3322CE330E200DB6091 /* RecipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +61,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AF7E32F2CE32F0D00DB6091 /* Kingfisher in Frameworks */,
+
 				6AF7E3252CE2277F00DB6091 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -147,6 +155,8 @@
 			children = (
 				6AF7E31B2CE2141100DB6091 /* RecipeListViewModel.swift */,
 				6AF7E31E2CE2242600DB6091 /* Recipe.swift */,
+				6AF7E32B2CE32E8D00DB6091 /* RecipesView.swift */,
+				6AF7E3322CE330E200DB6091 /* RecipeCell.swift */,
 			);
 			path = RecipeList;
 			sourceTree = "<group>";
@@ -201,6 +211,7 @@
 			name = Yummly;
 			packageProductDependencies = (
 				6AF7E3242CE2277F00DB6091 /* Alamofire */,
+				6AF7E32E2CE32F0D00DB6091 /* Kingfisher */,
 			);
 			productName = Yummly;
 			productReference = 6AF7E2BF2CE2091900DB6091 /* Yummly.app */;
@@ -280,6 +291,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				6AF7E3182CE2123C00DB6091 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				6AF7E32D2CE32F0D00DB6091 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 6AF7E2C02CE2091900DB6091 /* Products */;
@@ -327,7 +339,9 @@
 				6AF7E31C2CE2141100DB6091 /* RecipeListViewModel.swift in Sources */,
 				6AF7E3082CE209B400DB6091 /* ContentView.swift in Sources */,
 				6AF7E3092CE209B400DB6091 /* YummlyApp.swift in Sources */,
+				6AF7E3332CE330E200DB6091 /* RecipeCell.swift in Sources */,
 				6AF7E3142CE20B1400DB6091 /* RecipesService.swift in Sources */,
+				6AF7E32C2CE32E8D00DB6091 /* RecipesView.swift in Sources */,
 				6AF7E31F2CE2242600DB6091 /* Recipe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -666,6 +680,14 @@
 				minimumVersion = 5.10.1;
 			};
 		};
+		6AF7E32D2CE32F0D00DB6091 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -678,6 +700,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6AF7E3182CE2123C00DB6091 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		6AF7E32E2CE32F0D00DB6091 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6AF7E32D2CE32F0D00DB6091 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
