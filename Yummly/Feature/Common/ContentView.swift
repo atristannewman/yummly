@@ -12,14 +12,13 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            VStack { // When a new Feature is added this will likely change into a TabView
+            VStack { // When another Feature/Screen is added this will likely change into a TabView
                 Label("Hello world!", systemImage: "star")
             }
             
         }.onAppear() {
             Task {
                 try await viewModel.onAppear()
-                viewModel.recipeNames.forEach { print($0) }
             }
             
         }
