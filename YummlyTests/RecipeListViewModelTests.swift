@@ -8,49 +8,100 @@
 import XCTest
 @testable import Yummly
   
-final class RecipeListViewModelTest: XCTestCase {
+class RecipeListViewModelTest: XCTestCase {
     
-    var viewModel: RecipeListViewModel!
+    private var viewModel: RecipeListViewModel!
+    private var mockService: MockRecipesService!
+    private var testNetworkManager: NetworkManager!
     
     override func setUp() async throws {
         try await super.setUp()
         
-        viewModel = await MainActor.run {
-            RecipeListViewModel()
+        mockService = MockRecipesService()
+        testNetworkManager = NetworkManager()
+        viewModel = await RecipeListViewModel(recipeService: mockService)
+        viewModel.networkManager = testNetworkManager
+    }
+    
+    func testIdealOnAppearTraits() async throws {
+        let onAppearExpectation = expectation(description: "On appear")
+        
+        Task { @MainActor in
+            try await viewModel.onAppear()
+            onAppearExpectation.fulfill()
+            
+            XCTAssertFalse(viewModel.isLoading)
+            XCTAssertTrue(viewModel.isConnected)
+            XCTAssertNil(viewModel.errorMessage)
+        }
+        
+        await fulfillment(of: [onAppearExpectation], timeout: 1.0)
+    }
+    
+    func testOnAppearWithNormalGetRecipesJson() async throws {
+        mockService.responseType = .normal
+        
+        try await viewModel.onAppear()
+        
+        await MainActor.run {
+            XCTAssertGreaterThan(viewModel.recipes.count, 0)
         }
     }
     
-    func testOnAppearWithSuccessfulFetch() async throws {
-        let mockService = MockRecipesService()
+    func testOnAppearWithMalformedGetRecipesJson() async throws {
+        mockService.responseType = .malformed
         
-    }
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-      
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        XCTAssertTrue(true)
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-        XCTAssertTrue(viewModel != nil)
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+        try await viewModel.onAppear()
+        
+        await MainActor.run {
+            XCTAssertGreaterThan(viewModel.recipes.count, 0)
         }
-        
-        XCTAssertTrue(true)
     }
+    
+    func testOnAppearWithEmptyGetRecipesJson() async throws {
+        mockService.responseType = .empty
+        
+        try await viewModel.onAppear()
+        
+        await MainActor.run {
+            XCTAssertEqual(viewModel.recipes.count, 0)
+        }
+    }
+    
+    func testOnAppearWhenNetworkIsNotReachable() async throws {
 
+        testNetworkManager.isConnected = false
+
+
+        try await viewModel.onAppear()
+
+        await MainActor.run {
+            XCTAssertEqual(viewModel.errorMessage, "No internet connection. Please check your settings.")
+            XCTAssertFalse(viewModel.isConnected)
+        }
+    }
+    
+    func testOnAppearPerformance() throws {
+        measure(metrics: [XCTCPUMetric(), XCTMemoryMetric(), XCTClockMetric()]) {
+            let expectation = expectation(description: "onAppear completion")
+            
+            Task {
+                do {
+                    try await viewModel.onAppear()
+                    expectation.fulfill()
+                } catch {
+                    XCTFail("onAppear failed with error: \(error)")
+                }
+            }
+            
+            wait(for: [expectation], timeout: 5.0)
+        }
+    }
+    
+    override func tearDown() {
+        mockService = nil
+        viewModel = nil
+        super.tearDown()
+    }
+    
 }

@@ -13,6 +13,7 @@ protocol RecipesServiceProtocol {
 }
 
 actor RecipesService: RecipesServiceProtocol {
+    
     func getRecipes() async throws -> [Recipe] {
         let url = "https://d3jbb8n5wk0qxi.cloudfront.net/recipes.json"
         

@@ -8,11 +8,19 @@
 import SwiftUI
 
 @MainActor
-class RecipeListViewModel: ObservableObject {
+protocol RecipeListViewModelProtocol {
+    var recipeListService: RecipesServiceProtocol { get }
+    var recipes: [Recipe] { get set }
     
-    private let recipeListService: RecipesServiceProtocol
-    @ObservedObject private var networkManager = NetworkManager()
-    private(set) var recipes: [Recipe] = []
+    func onAppear() async throws
+}
+
+@MainActor
+class RecipeListViewModel: ObservableObject, RecipeListViewModelProtocol {
+    
+    let recipeListService: RecipesServiceProtocol
+    @ObservedObject var networkManager = NetworkManager()
+    @Published var recipes: [Recipe] = []
     @Published var recipeNames: [String] = []
     @Published var cuisines: [String] = []
     @Published var recipeImageUrls: [URL] = []
@@ -20,8 +28,8 @@ class RecipeListViewModel: ObservableObject {
     @Published var isConnected = false
     @Published var errorMessage: String? = nil
     
-    init() {
-        recipeListService = RecipesService()
+    init(recipeService: RecipesServiceProtocol = RecipesService()) {
+        recipeListService = recipeService
     }
     
     func onAppear() async throws {
