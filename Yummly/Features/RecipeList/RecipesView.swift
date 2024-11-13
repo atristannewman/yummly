@@ -26,6 +26,10 @@ struct RecipesView: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .init())
                 
+            } else if let errorMessage = viewModel.errorMessage {
+                Text(errorMessage)
+                    .foregroundColor(.red)
+                    .padding()
             } else if viewModel.recipeNames.isEmpty {
                 VStack {
                     Image(systemName: "frying.pan")
@@ -48,7 +52,7 @@ struct RecipesView: View {
                         RecipeCell(
                             recipeName: name,
                             recipeUrl: viewModel.recipeImageUrls[index],
-                            recipeCuisineType: viewModel.culinaryStyles[index]
+                            recipeCuisine: viewModel.cuisines[index]
                         )
                     }
                 }

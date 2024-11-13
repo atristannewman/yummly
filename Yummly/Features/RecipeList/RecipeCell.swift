@@ -11,7 +11,7 @@ import Kingfisher
 struct RecipeCell: View {
     let recipeName: String
     let recipeUrl: URL?
-    let recipeCuisineType: String
+    let recipeCuisine: String
     
     var body: some View {
         ZStack(alignment: .bottomLeading) {
@@ -31,7 +31,7 @@ struct RecipeCell: View {
                     .font(.system(size: 16, weight: .bold))
                     .foregroundColor(.white)
                 
-                Text(recipeCuisineType)
+                Text(recipeCuisine)
                     .font(.system(size: 14))
                     .foregroundColor(.white)
             }
