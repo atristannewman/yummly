@@ -13,12 +13,6 @@ struct RecipesView: View {
     
     var body: some View {
         ScrollView {
-            if !viewModel.isConnected {
-                Text("currently_offline")
-                    .foregroundColor(.orange)
-                    .padding()
-            }
-            
             if viewModel.isLoading {
                 VStack {
                     ProgressView("recipes_loading")
@@ -27,7 +21,7 @@ struct RecipesView: View {
                 .frame(maxWidth: .infinity, maxHeight: .init())
                 
             } else if let errorMessage = viewModel.errorMessage {
-                Text(errorMessage)
+                Text(String(errorMessage))
                     .foregroundColor(.red)
                     .padding()
             } else if viewModel.recipeNames.isEmpty {
@@ -57,7 +51,15 @@ struct RecipesView: View {
                     }
                 }
                 .padding()
+            } 
+        }
+        .onAppear() {
+            Task {
+                try await viewModel.onAppear()
             }
+        }
+        .refreshable {
+           await viewModel.pullToRefresh()
         }
     }
 }

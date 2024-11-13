@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6AA25BD92CE5040600876710 /* View+OfflineAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA25BD82CE5040600876710 /* View+OfflineAlert.swift */; };
+		6AA25BDB2CE5043000876710 /* OfflineAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AA25BDA2CE5043000876710 /* OfflineAlertView.swift */; };
 		6AF7E3062CE209B400DB6091 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AF7E3002CE209B400DB6091 /* Preview Assets.xcassets */; };
 		6AF7E3072CE209B400DB6091 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AF7E3022CE209B400DB6091 /* Assets.xcassets */; };
 		6AF7E3082CE209B400DB6091 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF7E3032CE209B400DB6091 /* ContentView.swift */; };
@@ -19,7 +21,7 @@
 		6AF7E32F2CE32F0D00DB6091 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 6AF7E32E2CE32F0D00DB6091 /* Kingfisher */; };
 		6AF7E3332CE330E200DB6091 /* RecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF7E3322CE330E200DB6091 /* RecipeCell.swift */; };
 		6AF7E33F2CE389C900DB6091 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 6AF7E33E2CE389C900DB6091 /* Localizable.xcstrings */; };
-		6AF7E3412CE38FF600DB6091 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF7E3402CE38FF600DB6091 /* NetworkManager.swift */; };
+		6AF7E3412CE38FF600DB6091 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF7E3402CE38FF600DB6091 /* NetworkMonitor.swift */; };
 		6AF7E3492CE3BD2A00DB6091 /* RecipeListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF7E3482CE3BD2A00DB6091 /* RecipeListViewModelTests.swift */; };
 		6AF7E34B2CE3C0C100DB6091 /* MockRecipesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF7E34A2CE3C0C100DB6091 /* MockRecipesService.swift */; };
 /* End PBXBuildFile section */
@@ -42,6 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6AA25BD82CE5040600876710 /* View+OfflineAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+OfflineAlert.swift"; sourceTree = "<group>"; };
+		6AA25BDA2CE5043000876710 /* OfflineAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineAlertView.swift; sourceTree = "<group>"; };
 		6AF7E2BF2CE2091900DB6091 /* Yummly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yummly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AF7E2CF2CE2091B00DB6091 /* YummlyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YummlyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AF7E2D92CE2091B00DB6091 /* YummlyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YummlyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -56,7 +60,7 @@
 		6AF7E32B2CE32E8D00DB6091 /* RecipesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesView.swift; sourceTree = "<group>"; };
 		6AF7E3322CE330E200DB6091 /* RecipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCell.swift; sourceTree = "<group>"; };
 		6AF7E33E2CE389C900DB6091 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
-		6AF7E3402CE38FF600DB6091 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		6AF7E3402CE38FF600DB6091 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		6AF7E3482CE3BD2A00DB6091 /* RecipeListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeListViewModelTests.swift; sourceTree = "<group>"; };
 		6AF7E34A2CE3C0C100DB6091 /* MockRecipesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRecipesService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -153,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				6AF7E3032CE209B400DB6091 /* ContentView.swift */,
+				6AA25BDA2CE5043000876710 /* OfflineAlertView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -212,6 +217,7 @@
 		6AF7E3382CE3573500DB6091 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				6AA25BD82CE5040600876710 /* View+OfflineAlert.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -226,7 +232,7 @@
 		6AF7E33A2CE357F200DB6091 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				6AF7E3402CE38FF600DB6091 /* NetworkManager.swift */,
+				6AF7E3402CE38FF600DB6091 /* NetworkMonitor.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -380,8 +386,10 @@
 				6AF7E3082CE209B400DB6091 /* ContentView.swift in Sources */,
 				6AF7E3092CE209B400DB6091 /* YummlyApp.swift in Sources */,
 				6AF7E3332CE330E200DB6091 /* RecipeCell.swift in Sources */,
-				6AF7E3412CE38FF600DB6091 /* NetworkManager.swift in Sources */,
+				6AA25BD92CE5040600876710 /* View+OfflineAlert.swift in Sources */,
+				6AF7E3412CE38FF600DB6091 /* NetworkMonitor.swift in Sources */,
 				6AF7E3142CE20B1400DB6091 /* RecipesService.swift in Sources */,
+				6AA25BDB2CE5043000876710 /* OfflineAlertView.swift in Sources */,
 				6AF7E32C2CE32E8D00DB6091 /* RecipesView.swift in Sources */,
 				6AF7E31F2CE2242600DB6091 /* Recipe.swift in Sources */,
 			);
@@ -560,6 +568,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -589,6 +598,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

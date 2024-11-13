@@ -20,7 +20,7 @@ struct ContentView: View {
                 try await viewModel.onAppear()
             }
             
-        }
+        }.offlineAlert()
     }
 }
 

@@ -26,11 +26,9 @@ This folder structure is designed to support scalability and maintainability in 
 
 - Networking: Specifically for network-related operations, using Alamofire for HTTP requests. In a larger project this holds request builders, API endpoints, and response handlers.
 
-- Coordinators: Manages navigation and flow between views, providing a clear structure for user interactions and improving code readability.
+- Coordinators: (for larger applications, overkill for this little app) Manages navigation and flow between views, providing a clear structure for user interactions and improving code readability.
 
 - Utilities: Houses common functions and extensions that can be reused across the application, reducing code duplication.
 
-- Resources: Contains assets like images and colors, organized for easy access and modification.
-
-- Tests: Ensures that each component is thoroughly tested, promoting reliability and confidence in the application’s functionality.
+- Tests: Primarly focused on testing the View Model. The ViewModel contains the core business logic of the application, including decoding and state management.
 

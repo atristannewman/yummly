@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 @MainActor
 protocol RecipeListViewModelProtocol {
@@ -13,20 +14,22 @@ protocol RecipeListViewModelProtocol {
     var recipes: [Recipe] { get set }
     
     func onAppear() async throws
+    func pullToRefresh() async
 }
 
 @MainActor
 class RecipeListViewModel: ObservableObject, RecipeListViewModelProtocol {
     
     let recipeListService: RecipesServiceProtocol
-    @ObservedObject var networkManager = NetworkManager()
+//    @ObservedObject var networkManager = NetworkManager()
     @Published var recipes: [Recipe] = []
     @Published var recipeNames: [String] = []
     @Published var cuisines: [String] = []
     @Published var recipeImageUrls: [URL] = []
     @Published var isLoading = false
-    @Published var isConnected = false
     @Published var errorMessage: String? = nil
+    private var cancellables: Set<AnyCancellable> = []
+    @State var isConnected = false
     
     init(recipeService: RecipesServiceProtocol = RecipesService()) {
         recipeListService = recipeService
@@ -37,12 +40,6 @@ class RecipeListViewModel: ObservableObject, RecipeListViewModelProtocol {
         isLoading = true
         defer {isLoading = false}
         
-        isConnected = await networkManager.reachable()
-        if !isConnected {
-            errorMessage = "No internet connection. Please check your settings."
-            return
-        }
-        
         do {
             recipes = try await recipeListService.getRecipes()
             await loadRecipes()
@@ -50,6 +47,14 @@ class RecipeListViewModel: ObservableObject, RecipeListViewModelProtocol {
             errorMessage = error.localizedDescription
         }
         
+    }
+    
+    func pullToRefresh() async {
+        do {
+            try await onAppear()
+        } catch {
+            errorMessage = "Error refreshing recipes: \(error.localizedDescription)"
+        }
     }
     
     private func loadRecipes() async -> Void {

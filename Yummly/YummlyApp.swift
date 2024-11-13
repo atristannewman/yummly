@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct YummlyApp: App {
+    @ObservedObject var monitor = NetworkMonitor()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(monitor)
         }
     }
 }
