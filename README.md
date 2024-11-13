@@ -49,9 +49,9 @@ This folder structure is designed to support scalability and maintainability in 
 
 ## Time Spent
 Total: ~5 hours
-- Architecture & Setup: ~2 hours
+- Architecture & Setup: ~1 hours
 - Core Implementation: ~2 hours
-- Testing & Refinement: ~1 hours
+- Testing & Refinement: ~2 hours
 
 ## External Code and Dependencies
 1. Alamofire - Networking
