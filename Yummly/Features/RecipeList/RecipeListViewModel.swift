@@ -21,7 +21,6 @@ protocol RecipeListViewModelProtocol {
 class RecipeListViewModel: ObservableObject, RecipeListViewModelProtocol {
     
     let recipeListService: RecipesServiceProtocol
-//    @ObservedObject var networkManager = NetworkManager()
     @Published var recipes: [Recipe] = []
     @Published var recipeNames: [String] = []
     @Published var cuisines: [String] = []

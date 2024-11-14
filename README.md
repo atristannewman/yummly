@@ -6,16 +6,20 @@
 //
 
 ## Table of Content
-- Design Considerations & Focus Areas
+- Trade-offs and Decisions
+- Focus Areas
 - Steps to Run the App
 - Project Structure Overview
 - Time Spent
-- To Dos/Given More Time
+- External Code and Dependencies
+- Additional Information
+- To Dos (Given More Time)
 
 ## Trade-offs and Decisions
 - Networking Consdireation: I briefly considered choosing a networking library for the Yummly app, I opted for **Alamofire** over **Moya**. Alamofire is better maintained, having an update 11 days ago, versus Moya in August. Alamofire, Moya, and URLRequests require boilter plate to make scalabl. It made sense to go with Alamofire, because you get the benefits of just enough data task abstraction.
 - Used Kingfisher instead of building custom solution. Traded control for reliability and maintenance.
 - Kept RecipesService simple for MVP. Would build out a Network Manager in the future, it would endup looking like Moya under the hood.
+- Not passing an array of Recipe structs: To prepare for future application growth, the decision was made to pull out relevant features for the UI currently used. This will become important by allocating less memory to multiple arrays of traits relevant to the different Feature variables, such as an array of filtered or sorted recipes.
 
 ## Focus Areas
 - Modular Architecture: This structure allows for efficient scaling as the application grows.
@@ -63,7 +67,10 @@ Total: ~5 hours
 
 ## To Dos
 1. More granualar error handling when it comes to malformed data.
-2. Figure out what is going on with the Network Monitor. I couldn't get it to consistently report when toggling wifi in simulator and side loading form path.status
-3. Build out the ui and make use of the youtube video urls sent in the recipe objects. Something like when the user taps or holds to scroll the video of that recipe starts paying in the cell.
+2. Figure out what is going on with the Network Monitor. I couldn't get it to consistently report when toggling wifi in simulator and side loading from path.status
+3. Build out the ui and make use of the youtube video urls sent in the recipe objects. Something like when the user taps or holds to scroll the video of that recipe starts playing in the cell.
 4. Filtering and sorting. I ran out of time on this one. Sorting by cuisine and name, then filtering by cuisine.
 5. Dark mode
+6. Scroll to top button that appears at 10% scroll
+7. More white space around the AppIcon. It looks crowded.
+8. Shadow to text and implementing Roboto
