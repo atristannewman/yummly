@@ -13,7 +13,7 @@ protocol RecipeListViewModelProtocol {
     var recipeListService: RecipesServiceProtocol { get }
     var recipes: [Recipe] { get set }
     
-    func onAppear() async throws
+    func start() async throws
     func pullToRefresh() async
 }
 
@@ -22,9 +22,6 @@ class RecipeListViewModel: ObservableObject, RecipeListViewModelProtocol {
     
     let recipeListService: RecipesServiceProtocol
     @Published var recipes: [Recipe] = []
-    @Published var recipeNames: [String] = []
-    @Published var cuisines: [String] = []
-    @Published var recipeImageUrls: [URL] = []
     @Published var isLoading = false
     @Published var errorMessage: String? = nil
     private var cancellables: Set<AnyCancellable> = []
@@ -34,35 +31,18 @@ class RecipeListViewModel: ObservableObject, RecipeListViewModelProtocol {
         recipeListService = recipeService
     }
     
-    func onAppear() async throws {
-        
+    private func loadRecipes() async throws {
         isLoading = true
-        defer {isLoading = false}
+        defer { isLoading = false }
         
-        do {
-            recipes = try await recipeListService.getRecipes()
-            await loadRecipes()
-        } catch {
-            errorMessage = error.localizedDescription
-        }
-        
+        recipes = try await recipeListService.getRecipes()
+    }
+    
+    func start() async throws {
+        try await loadRecipes()
     }
     
     func pullToRefresh() async {
-        do {
-            try await onAppear()
-        } catch {
-            errorMessage = "Error refreshing recipes: \(error.localizedDescription)"
-        }
-    }
-    
-    private func loadRecipes() async -> Void {
-        recipes.forEach { recipe in
-            recipeNames.append(recipe.name)
-            cuisines.append(recipe.cuisine)
-            if let urlString = recipe.photoURLLarge, let url = URL(string: urlString) {
-                recipeImageUrls.append(url)
-            }
-        }
+        try? await loadRecipes()
     }
 }

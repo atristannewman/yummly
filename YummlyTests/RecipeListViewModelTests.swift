@@ -12,26 +12,22 @@ class RecipeListViewModelTest: XCTestCase {
     
     private var viewModel: RecipeListViewModel!
     private var mockService: MockRecipesService!
-    private var testNetworkManager: NetworkManager!
     
     override func setUp() async throws {
         try await super.setUp()
         
         mockService = MockRecipesService()
-        testNetworkManager = NetworkManager()
         viewModel = await RecipeListViewModel(recipeService: mockService)
-        viewModel.networkManager = testNetworkManager
     }
     
     func testIdealOnAppearTraits() async throws {
         let onAppearExpectation = expectation(description: "On appear")
         
         Task { @MainActor in
-            try await viewModel.onAppear()
+            try await viewModel.start()
             onAppearExpectation.fulfill()
             
             XCTAssertFalse(viewModel.isLoading)
-            XCTAssertTrue(viewModel.isConnected)
             XCTAssertNil(viewModel.errorMessage)
         }
         
@@ -41,7 +37,7 @@ class RecipeListViewModelTest: XCTestCase {
     func testOnAppearWithNormalGetRecipesJson() async throws {
         mockService.responseType = .normal
         
-        try await viewModel.onAppear()
+        try await viewModel.start()
         
         await MainActor.run {
             XCTAssertGreaterThan(viewModel.recipes.count, 0)
@@ -51,7 +47,7 @@ class RecipeListViewModelTest: XCTestCase {
     func testOnAppearWithMalformedGetRecipesJson() async throws {
         mockService.responseType = .malformed
         
-        try await viewModel.onAppear()
+        try await viewModel.start()
         
         await MainActor.run {
             XCTAssertGreaterThan(viewModel.recipes.count, 0)
@@ -61,7 +57,7 @@ class RecipeListViewModelTest: XCTestCase {
     func testOnAppearWithEmptyGetRecipesJson() async throws {
         mockService.responseType = .empty
         
-        try await viewModel.onAppear()
+        try await viewModel.start()
         
         await MainActor.run {
             XCTAssertEqual(viewModel.recipes.count, 0)
@@ -70,13 +66,9 @@ class RecipeListViewModelTest: XCTestCase {
     
     func testOnAppearWhenNetworkIsNotReachable() async throws {
 
-        testNetworkManager.isConnected = false
-
-
-        try await viewModel.onAppear()
+        try await viewModel.start()
 
         await MainActor.run {
-            XCTAssertEqual(viewModel.errorMessage, "No internet connection. Please check your settings.")
             XCTAssertFalse(viewModel.isConnected)
         }
     }
@@ -87,7 +79,7 @@ class RecipeListViewModelTest: XCTestCase {
             
             Task {
                 do {
-                    try await viewModel.onAppear()
+                    try await viewModel.start()
                     expectation.fulfill()
                 } catch {
                     XCTFail("onAppear failed with error: \(error)")

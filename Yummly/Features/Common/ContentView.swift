@@ -9,18 +9,22 @@ import SwiftUI
 
 @MainActor
 struct ContentView: View {
-    @StateObject private var viewModel = RecipeListViewModel()
-    
+    @StateObject private var recipeListViewModel = RecipeListViewModel()
+
     var body: some View {
         NavigationView {
-            RecipesView(viewModel: viewModel)
+            RecipesView(viewModel: recipeListViewModel)
                 .navigationTitle(String(localized: "recipes_title"))
-        }.onAppear() {
-            Task {
-                try await viewModel.onAppear()
+                .task {
+                    try? await recipeListViewModel.start()
+                }
+        }
+        .offlineAlert()
+        .overlay {
+            if recipeListViewModel.isLoading {
+                ProgressView()
             }
-            
-        }.offlineAlert()
+        }
     }
 }
 

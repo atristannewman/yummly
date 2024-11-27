@@ -24,7 +24,7 @@ struct RecipesView: View {
                 Text(String(errorMessage))
                     .foregroundColor(.red)
                     .padding()
-            } else if viewModel.recipeNames.isEmpty {
+            } else if viewModel.recipes.isEmpty {
                 VStack {
                     Image(systemName: "frying.pan")
                         .resizable()
@@ -42,21 +42,16 @@ struct RecipesView: View {
                 .padding()
             } else {
                 LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 5), count: 2), spacing: 5) {
-                    ForEach(Array(viewModel.recipeNames.enumerated()), id: \.offset) { index, name in
+                    ForEach(viewModel.recipes) { recipe in
                         RecipeCell(
-                            recipeName: name,
-                            recipeUrl: viewModel.recipeImageUrls[index],
-                            recipeCuisine: viewModel.cuisines[index]
+                            recipeName: recipe.name,
+                            recipeUrl: URL(string: recipe.photoURLSmall!),
+                            recipeCuisine: recipe.cuisine
                         )
                     }
                 }
                 .padding()
             } 
-        }
-        .onAppear() {
-            Task {
-                try await viewModel.onAppear()
-            }
         }
         .refreshable {
            await viewModel.pullToRefresh()

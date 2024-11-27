@@ -51,11 +51,6 @@ This folder structure is designed to support scalability and maintainability in 
 - Tests: Primarly focused on testing the View Model. The ViewModel contains the core business logic of the application, including decoding and state management.
     - Used Protocols to make this easier.
 
-## Time Spent
-Total: ~5 hours
-- Architecture & Setup: ~1 hours
-- Core Implementation: ~2 hours
-- Testing & Refinement: ~2 hours
 
 ## External Code and Dependencies
 1. Alamofire - Networking
