@@ -61,8 +61,9 @@ This folder structure is designed to support scalability and maintainability in 
 1. Just the Network Monitor wasn't very reliable
 
 ## To Dos
-1. More granualar error handling when it comes to malformed data.
-2. Figure out what is going on with the Network Monitor. I couldn't get it to consistently report when toggling wifi in simulator and side loading from path.status
+1. Reduce scale of folder layout for the size and scope of the project.
+2a. More granualar error handling when it comes to malformed data.
+2b. Figure out what is going on with the Network Monitor. I couldn't get it to consistently report when toggling wifi in simulator and side loading from path.status
 3. Build out the ui and make use of the youtube video urls sent in the recipe objects. Something like when the user taps or holds to scroll the video of that recipe starts playing in the cell.
 4. Filtering and sorting. I ran out of time on this one. Sorting by cuisine and name, then filtering by cuisine.
 5. Dark mode
